@@ -1,0 +1,22 @@
+@import "colors";
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form label {
+  color: $text-color;
+  padding: 0;
+  margin: 8px 0 4px;
+}
+
+.form .input-control,
+.form .textarea-control,
+.form select {
+  width: 100%;
+  padding: 6px 4px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  background-color: $background-color;
+}

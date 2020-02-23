@@ -1,0 +1,53 @@
+{
+  "name": "todo-board-client",
+  "version": "1.0.0",
+  "description": "Todo Board client",
+  "main": "index.js",
+  "scripts": {
+    "serve": "vue-cli-service serve --no-clean",
+    "build": "vue-cli-service build --no-clean",
+    "watch": "vue-cli-service build --mode development --watch --no-clean"
+  },
+  "author": "Michael F. Ostertag",
+  "license": "ISC",
+  "devDependencies": {
+    "@vue/cli-plugin-typescript": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "sass": "^1.24.2",
+    "sass-loader": "^8.0.0",
+    "terser-webpack-plugin": "^2.3.0",
+    "ts-loader": "^5.3.3",
+    "typescript": "~3.5.3",
+    "vue-loader": "^15.6.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.2.3",
+    "webpack-obfuscator": "^0.18.0"
+  },
+  "dependencies": {
+    "@types/es6-promise": "^3.3.0",
+    "@types/jquery": "^3.3.32",
+    "@types/select2": "^4.0.48",
+    "axios": "^0.18.0",
+    "core-js": "^3.5.0",
+    "install": "^0.12.2",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.13.0",
+    "select2": "~4.0",
+    "tslib": "^1.10.0",
+    "url-loader": "^1.1.2",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.6",
+    "vue-upload-component": "^2.8.20",
+    "vue2-touch-events": "^2.0.0",
+    "vuex": "^3.1.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
