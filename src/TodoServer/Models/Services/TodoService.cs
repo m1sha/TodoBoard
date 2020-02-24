@@ -27,10 +27,7 @@ namespace TodoServer.Models.Services
     public Task<string> AddOrUpdate(TodoItem item)
        => storage.Todo.AddOrUpdate(item);
 
-
     public Task Remove(string[] uids)
-    {
-      throw new NotImplementedException();
-    }
+      => storage.Todo.Remove(uids);
   }
 }

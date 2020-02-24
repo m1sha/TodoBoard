@@ -39,6 +39,7 @@ namespace TodoServer
       storage.CreateIfNotExists();
 
       services.AddSingleton<ITodoService, TodoService>(_ => new TodoService(storage));
+      services.AddSingleton<IUserService, UserService>(_ => new UserService(storage));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
