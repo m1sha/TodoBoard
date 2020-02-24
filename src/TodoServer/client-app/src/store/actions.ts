@@ -1,6 +1,7 @@
 const Action = {
   TodoList : "TodoList",
-  TodoAdd : "TodoAdd"
+  TodoAdd : "TodoAdd",
+  TodoRemove : "TodoRemove"
 }
 
 export default Action

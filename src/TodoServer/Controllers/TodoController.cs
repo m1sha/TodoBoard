@@ -45,5 +45,18 @@ namespace TodoServer.Controllers
       var result = await service.AddOrUpdate(item);
       return Ok(result);
     }
+
+    /// <summary>
+    /// Remove ToDos by uids
+    /// </summary>
+    /// <param name="uids">Todo item</param>
+    /// <returns></returns>
+    [Route("Todo/Remove")]
+    [HttpPost]
+    public async Task<IActionResult> Add([FromBody] string[] uids)
+    {
+      await service.Remove(uids);
+      return Ok();
+    }
   }
 }

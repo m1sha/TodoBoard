@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TodoServer.Models.Entities;
 using TodoServer.Models.Services.Intf;
@@ -24,8 +25,16 @@ namespace TodoServer.Models.Services
       throw new NotImplementedException();
     }
 
-    public Task<string> AddOrUpdate(TodoItem item)
-       => storage.Todo.AddOrUpdate(item);
+    public async Task<string> AddOrUpdate(TodoItem item)
+    {
+      var users = await storage.User.GetList(new UserFilter());
+      item.Status = TodoStatus.New;
+      item.UserAssign = users.First();
+      item.UserCreator = users.First();
+
+      return await storage.Todo.AddOrUpdate(item);
+    }
+       
 
     public Task Remove(string[] uids)
       => storage.Todo.Remove(uids);

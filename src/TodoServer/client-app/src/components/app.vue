@@ -5,7 +5,7 @@
       <main role="main" class="pb-3">
 
         <todo-list />
-        <div style="margin-bottom:60px;">
+        <div style="margin-bottom:60px;"></div>
       </main>
     </div>
     <app-footer />
