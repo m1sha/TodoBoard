@@ -52,11 +52,11 @@ AS BEGIN
       [todo]
     SET
       [title]           = @nvTitle
-      [text]            = @nvText
-      [status]          = @iStatus
-      [user_creator_id] = @iUserCreatorId
-      [user_assign_id]  = @iUserAssignId
-      [change_date]     = GETDATE()
+      ,[text]            = @nvText
+      ,[status]          = @iStatus
+      ,[user_creator_id] = @iUserCreatorId
+      ,[user_assign_id]  = @iUserAssignId
+      ,[change_date]     = GETDATE()
     WHERE
       [id] = @iTodoId
   END
