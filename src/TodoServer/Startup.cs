@@ -29,12 +29,12 @@ namespace TodoServer
     {
       services.AddControllersWithViews();
       services.AddSignalR();
+      
       var settings = Configuration.GetSection("TodoStorageSettings").Get<TodoStorageSettings>();
       string rootPath = Environment.WebRootPath;
       settings.SqlInstallFileName = Path.Combine(rootPath, settings.SqlInstallFileName);
 
       var storage = DbStorageFactory.Create(settings);
-
       storage.CheckConnection();
       storage.CreateIfNotExists();
 
@@ -55,8 +55,6 @@ namespace TodoServer
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
       }
-
-      
 
       app.UseHttpsRedirection();
       app.UseStaticFiles();

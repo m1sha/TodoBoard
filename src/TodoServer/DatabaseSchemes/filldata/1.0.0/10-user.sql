@@ -1,0 +1,13 @@
+EXEC gsp_user_insert '78d1aa3a3de147a6aaa9f7777c7bc071', 'Jar Jar Binks'
+EXEC gsp_user_insert '55d506f2e87148e3a4ee8207e7592fc0', 'Mace Windu'
+EXEC gsp_user_insert 'b0ddbbf531154ff0a796fcc9c7abd50e', 'Wicket'
+EXEC gsp_user_insert 'de1fd5fb521749d285768677e40ef73b', 'Porg'
+EXEC gsp_user_insert 'f8aa332732c449e9852129fb4b99ec82', 'K-2SO'
+EXEC gsp_user_insert 'f11dbe85358447569ae1505bfdd247e3', 'C-3PO'
+EXEC gsp_user_insert 'd2c6247a924f4672a31e62f9a92ed29c', 'Bail Organa'
+EXEC gsp_user_insert 'cdced83cd1874b92bb8266c3451382fb', 'Jyn Erso'
+EXEC gsp_user_insert '51766f96b6ea4011b12b8a9305cf92a8', 'Nien Nunb'
+EXEC gsp_user_insert '0c3283f5eaad4e059a9e6fab343af39c', 'BB-8'
+EXEC gsp_user_insert 'c69d51dfbe064c85b69431091987ef1d', 'Chewbacca'
+EXEC gsp_user_insert '931bfa60f24f47828779f3f1662d36f3', 'R2-D2'
+

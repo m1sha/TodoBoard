@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using TodoServer.Models.Entities;
 using TodoServer.Models.Storage.Intf;
 
 namespace TodoServer.Models.Storage.Db
@@ -11,5 +10,29 @@ namespace TodoServer.Models.Storage.Db
     public DbUserRepository(string connectionString) : base(connectionString)
     {
     }
+
+    public async Task<IEnumerable<User>> GetList(UserFilter filter)
+    => await Task.Run(() =>
+    {
+      using var connection = GetConnection();
+      using var sp = CreateSpCommand(connection, "gsp_user_select");
+      using var reader = sp.ExecuteReader();
+      var result = new List<User>();
+      while (reader.Read())
+      {
+        #region user fill
+
+        var i = 0;
+        var item = new User()
+        {
+          Uid = reader.GetString(i++),
+          Name = reader.GetString(i++),
+        };
+        #endregion
+
+        result.Add(item);
+      }
+      return result;
+    });
   }
 }

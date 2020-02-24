@@ -19,5 +19,12 @@ namespace TodoServer.Models.Storage.Intf
     /// <param name="item">Todo item</param>
     /// <returns></returns>
     public Task<string> AddOrUpdate(TodoItem item);
+
+    /// <summary>
+    /// Remove ToDo items from the ToDo items list by item identifiers
+    /// </summary>
+    /// <param name="uids">Uniq identifiers</param>
+    /// <returns></returns>
+    public Task Remove(string[] uids);
   }
 }

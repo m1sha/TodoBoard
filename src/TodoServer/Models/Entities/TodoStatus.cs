@@ -1,7 +1,11 @@
 ﻿
 namespace TodoServer.Models.Entities
 {
-  public enum TodoStatus
+  public enum TodoStatus: int
   {
+    Unknown = 0,
+    New = 1,
+    InWork = 2,
+    Finished = 3
   }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TodoServer.Models.Entities
 {
@@ -16,5 +13,11 @@ namespace TodoServer.Models.Entities
     public TodoStatus Status { get; set; }
 
     public DateTime CreateDate { get; set; }
+
+    public DateTime ChangeDate { get; set; }
+
+    public User UserCreator { get; set; }
+
+    public User UserAssign { get; set; }
   }
 }
