@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 using TodoServer.Hubs;
 using TodoServer.Middleware;
 using TodoServer.Models.Services;
@@ -14,12 +15,14 @@ namespace TodoServer
 {
   public class Startup
   {
-    public Startup(IConfiguration configuration)
+    public Startup(IConfiguration configuration, IWebHostEnvironment environment)
     {
       Configuration = configuration;
+      Environment = environment;
     }
 
     public IConfiguration Configuration { get; }
+    public IWebHostEnvironment Environment { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
@@ -27,6 +30,9 @@ namespace TodoServer
       services.AddControllersWithViews();
       services.AddSignalR();
       var settings = Configuration.GetSection("TodoStorageSettings").Get<TodoStorageSettings>();
+      string rootPath = Environment.WebRootPath;
+      settings.SqlInstallFileName = Path.Combine(rootPath, settings.SqlInstallFileName);
+
       var storage = DbStorageFactory.Create(settings);
 
       storage.CheckConnection();

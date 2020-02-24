@@ -4,5 +4,7 @@
   {
     public string ConnectionString { get; set; }
     public string DbName { get; set; }
+
+    public string SqlInstallFileName { get; set; }
   }
 }

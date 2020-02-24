@@ -1,0 +1,1 @@
+﻿Remove this folder manually after web-app installed
