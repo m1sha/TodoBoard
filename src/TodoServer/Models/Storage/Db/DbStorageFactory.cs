@@ -1,4 +1,6 @@
-﻿namespace TodoServer.Models.Storage
+﻿using TodoServer.Models.Storage.Intf;
+
+namespace TodoServer.Models.Storage.Db
 {
   public static class DbStorageFactory
   {

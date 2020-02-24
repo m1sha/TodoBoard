@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TodoServer.Models.Entities;
 using TodoServer.Models.Services.Intf;
-using TodoServer.Models.Storage;
+using TodoServer.Models.Storage.Intf;
 
 namespace TodoServer.Models.Services
 {
   public class TodoService : ITodoService
   {
 
+    private readonly IStorage storage;
+
     public TodoService(IStorage storage)
     {
-
+      this.storage = storage;
     }
 
     static readonly List<TodoItem> todos = new List<TodoItem>() {
@@ -29,11 +31,8 @@ namespace TodoServer.Models.Services
     };
 
 
-    public async Task<IEnumerable<TodoItem>> GetList(TodoFilter filter)
-      => await Task.Run(() =>
-      {
-        return todos;
-      });
+    public Task<IEnumerable<TodoItem>> GetList(TodoFilter filter)
+      => storage.Todo.GetList(filter);
 
     public Task<TodoItem> GetOne(string uid)
     {
