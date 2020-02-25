@@ -4,12 +4,12 @@
       <h3> {{title}}</h3>
     </template>
     <template slot="body">
-      <todo-add v-model="localTodo"/>
+      <todo-add v-model="localTodo" @valid="checkValid"/>
     </template>
     <template slot="footer">
 
       <div class="wb-modal-dialog-button wb-modal-dialog-button-right">
-        <button class="btn btn-outline-success wb-md-button" @click="onAccept()">OK</button>
+        <button class="btn btn-outline-success wb-md-button" :disabled="!isValid" @click="onAccept()">OK</button>
         <button class="btn btn-outline-secondary wb-md-button" @click="onCancel()">Закрыть</button>
       </div>
 
@@ -33,7 +33,8 @@ export default Vue.extend({
    },
    data(){
      return{
-      localTodo: new TodoItem()
+      localTodo: new TodoItem(),
+      isValid: false
      }
       
    },
@@ -45,6 +46,9 @@ export default Vue.extend({
      onCancel() {
        this.$emit("change-showDialog", false)
        this.$emit("cancel");
+     },
+     checkValid(isValid: boolean){
+       this.isValid = isValid
      }
    },
    created(){
