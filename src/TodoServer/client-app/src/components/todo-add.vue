@@ -5,7 +5,7 @@
     <label>Todo text</label>
     <textarea class="textarea-control" :class="{error: !isMessageValid }" v-model="todo.message" @input="checkValid('message')"></textarea>
     <label>Status</label>
-    <select2 />
+    <select2 v-model="todo.status"  :items="[{uid: 1, name:'New'}, {uid: 2, name:'In work'}, {uid: 3, name:'Finished'}]" />
   </div>
 </template>
 <style lang="scss">

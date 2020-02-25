@@ -1,7 +1,9 @@
 <template>
 
-<select ref="select">
-
+<select ref="select" v-model="selected">
+  <option v-for="(item, index) in items" :value="item.uid" :key="index" >
+     {{item.name}}
+  </option>
 </select>
 
 </template>
@@ -17,6 +19,15 @@ import Vue from 'vue'
 
 
 export default Vue.extend({
+  props:{
+     items: Array,
+     selected: Object
+  },
+   model: {
+     prop: "selected",
+     event: "change-selected"
+   },
+
   mounted(){
     const {select} = this.$refs
 
