@@ -8,13 +8,13 @@
 <style lang="scss">
    .todo-type{
      padding: 0 8px;
-     font-size: 12pt;
+     font-size: 14pt;
    }
    .feature{
-     color: #72f192;
+     color: #66d381;
    }
    .bug{
-     color: #f593e4;
+     color: #cc7fbf;
    }
    .refactoring{
      color: #72a9f1;

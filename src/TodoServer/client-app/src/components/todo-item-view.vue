@@ -59,7 +59,7 @@
 
 h3{
   color: $text-color;
-  font-size: 12pt;
+  font-size: 14pt;
 }
 
 code{
