@@ -1,12 +1,13 @@
 <template>
 <div>
   <div v-for="(item, index) in todos" :key="index">
-    <todo-item :item="item" @edit="openEditTodoDialog" @remove="openRemoveTodoDialog" />
+    <todo-item :item="item" @select="openSelectTodoDialog" @edit="openEditTodoDialog" @remove="openRemoveTodoDialog" />
   </div>
 
   <float-button showAddBtn="true" @add="openAddTodoDialog" />
   <todo-add-dialog v-if="showAddDialog" v-model="showAddDialog" :title="dialogTitle" :todo="currentTodo" @accept="addTodo" />
   <todo-remove-dialog v-if="showRemoveDialog" v-model="showRemoveDialog"  :todo="currentTodo" @accept="removeTodo" />
+  <todo-detail-dialog v-if="showDetailDialog" v-model="showDetailDialog"  :todo="currentTodo" />
 </div>
 </template>
 
@@ -18,6 +19,7 @@ import FloatButton from "./common/float-button.vue"
 import TodoItemView from "./todo-item-view.vue"
 import TodoAddDialog from "./todo-add-dialog.vue"
 import TodoRemoveDialog from "./todo-remove-dialog.vue"
+import TodoDetailDialog from "./todo-detail-dialog.vue"
 import { TodoItem } from '../entities/todo-item'
 
 export default Vue.extend({
@@ -25,6 +27,7 @@ export default Vue.extend({
       return {
         showAddDialog : false,
         showRemoveDialog : false,
+        showDetailDialog : false,
         dialogTitle: "",
         currentTodo: new TodoItem()
       }
@@ -45,6 +48,12 @@ export default Vue.extend({
     openRemoveTodoDialog(item: TodoItem){
        this.currentTodo = item
        this.showRemoveDialog = true
+    },
+
+    openSelectTodoDialog(item: TodoItem){
+       
+       this.currentTodo = item
+       this.showDetailDialog = true
     },
 
     async addTodo(item: TodoItem){
@@ -75,7 +84,8 @@ export default Vue.extend({
     "todo-item": TodoItemView,
     "float-button": FloatButton,
     "todo-add-dialog": TodoAddDialog,
-    "todo-remove-dialog": TodoRemoveDialog
+    "todo-remove-dialog": TodoRemoveDialog,
+    "todo-detail-dialog": TodoDetailDialog
   }
 })
 </script>

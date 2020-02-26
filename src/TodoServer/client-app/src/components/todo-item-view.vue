@@ -4,10 +4,7 @@
       <todo-type-view v-model="item.type" />
     </div>
     <div class="todo-column" style="flex:1">
-      <h3> {{item.title }}</h3>
-      <article class="markdown-body">
-        <vue-markdown :source="item.message"></vue-markdown>
-      </article>
+      <h3 @click="onSelect(item)">{{item.title }}</h3>
       
       <div>
         <span class="todo-column-key">by</span>
@@ -33,7 +30,6 @@
 </template>
 <style lang="scss">
 @import "@/assets/_colors.scss";
-@import "@/assets/github-markdown.scss";
 
 .todo-card {
   display: flex;
@@ -60,6 +56,7 @@
 h3{
   color: $text-color;
   font-size: 14pt;
+  cursor: pointer;
 }
 
 code{
@@ -108,7 +105,9 @@ export default Vue.extend({
     onRemove(item : TodoItem){
       this.$emit("remove", item)
     },
-    
+    onSelect(item : TodoItem){
+      this.$emit("select", item)
+    }
  
   },
   computed:{
@@ -124,7 +123,6 @@ export default Vue.extend({
     this.timeAgo = new TimeAgo('en-US')
   },
   components:{
-    "vue-markdown": VueMarkdown,
     "todo-type-view": TodoTypeView
   }
 })
