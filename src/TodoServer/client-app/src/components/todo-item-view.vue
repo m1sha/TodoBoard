@@ -1,7 +1,8 @@
 <template>
   <div class="todo-card">
-    <div class="todo-commands">
+    <div class="todo-statuses">
       <todo-type-view v-model="item.type" />
+      <todo-status-view v-model="item.status" />
     </div>
     <div class="todo-column" style="flex:1">
       <h3 @click="onSelect(item)">{{item.title }}</h3>
@@ -49,6 +50,13 @@
   align-items: flex-start;
 }
 
+.todo-statuses{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
 .todo-commands button i {
   padding: 4px 0;
 }
@@ -89,6 +97,7 @@ import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import VueMarkdown from 'vue-markdown'
 import TodoTypeView from "./todo-type-view.vue"
+import TodoStatusView from "./todo-status-view.vue"
 export default Vue.extend({
   props:{
     item : TodoItem,
@@ -123,7 +132,8 @@ export default Vue.extend({
     this.timeAgo = new TimeAgo('en-US')
   },
   components:{
-    "todo-type-view": TodoTypeView
+    "todo-type-view": TodoTypeView,
+    "todo-status-view": TodoStatusView
   }
 })
 
