@@ -5,7 +5,11 @@
     <label>Todo text</label>
     <textarea class="textarea-control" :class="{error: !isMessageValid }" v-model="todo.message" @input="checkValid('message')"></textarea>
     <label>Status</label>
-    <select2 v-model="todo.status"  :items="[{uid: 1, name:'New'}, {uid: 2, name:'In work'}, {uid: 3, name:'Finished'}]" />
+    <select2 v-model="todo.status"  :items="[{uid: 1, name:'New'}, {uid: 2, name:'In work'}, {uid: 3, name:'Finished'}]" type="number" />
+    <label>Created by</label>
+    <select2 v-model="todo.userCreator.uid"  :items="users" />
+    <label>Assign to</label>
+    <select2 v-model="todo.userAssign.uid"  :items="users" />
   </div>
 </template>
 <style lang="scss">
@@ -19,6 +23,8 @@
 import Vue from 'vue'
 import Select2 from "./common/select2.vue"
 import { TodoItem } from '@/entities/todo-item'
+import { mapGetters, mapActions } from 'vuex'
+import Actions from '@/store/actions'
 
 export default Vue.extend({
    props:{
@@ -28,16 +34,15 @@ export default Vue.extend({
      prop: "todo",
      event: "change-todo"
    },
-
-  data(){
-    return {
+   data(){
+     return {
       isTitleValid: true,
       isMessageValid: true,
-    }
-  },
+     }
+   },
 
-  methods:{
-    checkValid(controlName: string) {
+   methods:{
+     checkValid(controlName: string) {
       switch(controlName){
         case 'title': 
           this.isTitleValid = this.todo.title
@@ -49,12 +54,24 @@ export default Vue.extend({
       
       const result = this.isTitleValid && this.isMessageValid
       this.$emit('valid', result)
-    }
-  },
-  
+    },
+    ...mapActions([
+      Actions.UserList,
+    ])
+   },
+   computed:{
+    ...mapGetters([
+      'users',
+      'userFilter'
+    ])
+   },
 
-  components:{
+   mounted(){
+    this[Actions.UserList]()
+   },
+
+   components:{
     "select2": Select2
-  }
+   }
 })
 </script>

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-for="(item, index) in items" :key="index">
+  <div v-for="(item, index) in todos" :key="index">
     <todo-item :item="item" @edit="openEditTodoDialog" @remove="openRemoveTodoDialog" />
   </div>
 
@@ -64,7 +64,7 @@ export default Vue.extend({
   },
   computed:{
     ...mapGetters([
-      'items',
+      'todos',
       'filter'
     ])
   },

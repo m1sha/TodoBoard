@@ -21,18 +21,34 @@ import Vue from 'vue'
 export default Vue.extend({
   props:{
      items: Array,
-     selected: Object
+     selected: Object,
+     type: String
   },
-   model: {
+  model: {
      prop: "selected",
      event: "change-selected"
-   },
+  },
+  methods:{
+    onSelect(uid: string | number){
+      let res = uid
+      if (this.type === "number")
+        res = parseInt(uid as string)
+      this.$emit("change-selected", res)
+    }
+
+  },
 
   mounted(){
-    const {select} = this.$refs
-
+    const { select } = this.$refs
     var j = {} as any
-    eval(" $(select).select2()")
+    var ctx = this
+    eval(` 
+    $(select).select2()
+    $(select).on('select2:select', function (e) {
+      var uid = e.params.data.id;
+      ctx.onSelect(uid)
+    });
+    `)
     
 
 

@@ -110,7 +110,7 @@ export default Vue.extend({
       return new Date(this.item.changeDate).toLocaleString()
     }
   },
-  mounted(){
+  created(){
     TimeAgo.addLocale(en)
     this.timeAgo = new TimeAgo('en-US')
   }

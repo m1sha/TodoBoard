@@ -12,20 +12,20 @@ var Mutations = {
 const TodoModule = {
   state: { 
     filter: new TodoFilter(),
-    items : new Array<TodoItem>(),
+    todos : new Array<TodoItem>(),
 
-    dataReceiving: false,
-    dataSending: false,
+    todoDataReceiving: false,
+    todoDataSending: false,
   },
   mutations: { 
-   [Mutations.setItems](state: any, items: Array<TodoItem>){
-    state.items = items
+   [Mutations.setItems](state: any, todos: Array<TodoItem>){
+    state.todos = todos
    },
    [Mutations.setDataReceiving](state: any, value: boolean){
-    state.dataReceiving = value
+    state.todoDataReceiving = value
    },
    [Mutations.setDataSending](state: any, value: boolean){
-    state.dataSending = value
+    state.todoDataSending = value
    }
   },
   actions: {  
@@ -65,7 +65,7 @@ const TodoModule = {
    }
   },
   getters: {
-    items: state => state.items,
+    todos: state => state.todos,
     filter: state => state.filter,
   }
 }

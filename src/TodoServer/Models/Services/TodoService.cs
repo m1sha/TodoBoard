@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TodoServer.Models.Entities;
+using TodoServer.Models.Entities.Validation;
 using TodoServer.Models.Services.Intf;
 using TodoServer.Models.Storage.Intf;
 
@@ -27,11 +27,7 @@ namespace TodoServer.Models.Services
 
     public async Task<string> AddOrUpdate(TodoItem item)
     {
-      var users = await storage.User.GetList(new UserFilter());
-      item.Status = TodoStatus.New;
-      item.UserAssign = users.First();
-      item.UserCreator = users.First();
-
+      item.Validate();
       return await storage.Todo.AddOrUpdate(item);
     }
        
