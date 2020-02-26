@@ -12,6 +12,7 @@ SELECT
   ,t.create_date
   ,t.change_date
   ,t.status
+  ,t.type
   ,uc.uid  'user_creator_uid'
   ,uc.name 'user_creator_name'
   ,ua.uid  'user_assign_uid'

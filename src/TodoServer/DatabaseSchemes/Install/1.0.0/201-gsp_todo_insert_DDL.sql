@@ -8,6 +8,7 @@ CREATE PROCEDURE [gsp_todo_insert] (
   ,@nvTitle NVARCHAR(160)
   ,@nvText NVARCHAR(MAX)
   ,@iStatus INT
+  ,@iType INT
   ,@vcUserCreatorUid VARCHAR(32)
   ,@vcUserAssignUid VARCHAR(32)
 )
@@ -37,6 +38,7 @@ AS BEGIN
       ,[title]
       ,[text]
       ,[status]
+      ,[type]
       ,[user_creator_id]
       ,[user_assign_id]
     ) VALUES(
@@ -44,6 +46,7 @@ AS BEGIN
       ,@nvTitle
       ,@nvText
       ,@iStatus
+      ,@iType
       ,@iUserCreatorId
       ,@iUserAssignId
     )
@@ -51,9 +54,10 @@ AS BEGIN
     UPDATE
       [todo]
     SET
-      [title]           = @nvTitle
+      [title]            = @nvTitle
       ,[text]            = @nvText
       ,[status]          = @iStatus
+      ,[type]            = @iType
       ,[user_creator_id] = @iUserCreatorId
       ,[user_assign_id]  = @iUserAssignId
       ,[change_date]     = GETDATE()

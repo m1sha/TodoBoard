@@ -34,6 +34,7 @@ namespace TodoServer.Models.Storage.Db
             CreateDate = reader.GetDateTime(i++),
             ChangeDate = reader.GetDateTime(i++),
             Status = (TodoStatus)reader.GetInt32(i++),
+            Type = (TodoType)reader.GetInt32(i++),
             UserCreator = new User()
             {
               Uid = reader.GetString(i++),
@@ -65,6 +66,7 @@ namespace TodoServer.Models.Storage.Db
         AddParameter(sp, "@nvTitle", DbType.String, item.Title, 160);
         AddParameter(sp, "@nvText", DbType.String, item.Message, 1000);
         AddParameter(sp, "@iStatus", DbType.Int32, item.Status);
+        AddParameter(sp, "@iType", DbType.Int32, item.Type);
         AddParameter(sp, "@vcUserCreatorUid", DbType.String, item.UserCreator.Uid, 32);
         AddParameter(sp, "@vcUserAssignUid", DbType.String, item.UserAssign.Uid, 32);
 

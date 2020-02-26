@@ -19,6 +19,10 @@ CREATE TABLE [todo] (
     CONSTRAINT [df_todo$change_date] 
       DEFAULT(GETDATE()),
 
+  [type] INT NOT NULL 
+    CONSTRAINT [df_todo$type]
+      DEFAULT(1),
+
   [status] INT NOT NULL 
     CONSTRAINT [df_todo$status]
       DEFAULT(1),

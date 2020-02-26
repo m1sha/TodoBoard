@@ -1,5 +1,8 @@
 <template>
   <div class="todo-card">
+    <div class="todo-commands">
+      <todo-type-view v-model="item.type" />
+    </div>
     <div class="todo-column" style="flex:1">
       <h3> {{item.title }}</h3>
       <article class="markdown-body">
@@ -88,6 +91,7 @@ import { TodoItem } from '@/entities/todo-item'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import VueMarkdown from 'vue-markdown'
+import TodoTypeView from "./todo-type-view.vue"
 export default Vue.extend({
   props:{
     item : TodoItem,
@@ -120,7 +124,8 @@ export default Vue.extend({
     this.timeAgo = new TimeAgo('en-US')
   },
   components:{
-    "vue-markdown":VueMarkdown
+    "vue-markdown": VueMarkdown,
+    "todo-type-view": TodoTypeView
   }
 })
 

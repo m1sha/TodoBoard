@@ -12,6 +12,8 @@ namespace TodoServer.Models.Entities
 
     public TodoStatus Status { get; set; }
 
+    public TodoType Type { get; set; }
+
     public DateTime CreateDate { get; set; }
 
     public DateTime ChangeDate { get; set; }

@@ -4,6 +4,8 @@
     <input type="text" class="input-control" :class="{error: !isTitleValid }" v-model="todo.title" @input="checkValid('title')" />
     <label>Todo text</label>
     <textarea class="textarea-control" :class="{error: !isMessageValid }" v-model="todo.message" @input="checkValid('message')"></textarea>
+    <label>Type</label>
+    <select2 v-model="todo.type"  :items="[{uid: 1, name:'Feature'}, {uid: 2, name:'Bug'}, {uid: 3, name:'Refactoring'}]" type="number" />
     <label>Status</label>
     <select2 v-model="todo.status"  :items="[{uid: 1, name:'New'}, {uid: 2, name:'In work'}, {uid: 3, name:'Finished'}]" type="number" />
     <label>Created by</label>
