@@ -2,7 +2,10 @@
   <div class="todo-card">
     <div class="todo-column" style="flex:1">
       <h3> {{item.title }}</h3>
-      <code>{{item.message}}</code>
+      <article class="markdown-body">
+        <vue-markdown :source="item.message"></vue-markdown>
+      </article>
+      
       <div>
         <span class="todo-column-key">by</span>
         <span class="todo-column-value">{{ item.userCreator.name }}</span>
@@ -27,6 +30,7 @@
 </template>
 <style lang="scss">
 @import "@/assets/_colors.scss";
+@import "@/assets/github-markdown.scss";
 
 .todo-card {
   display: flex;
@@ -83,6 +87,7 @@ import Vue from 'vue'
 import { TodoItem } from '@/entities/todo-item'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+import VueMarkdown from 'vue-markdown'
 export default Vue.extend({
   props:{
     item : TodoItem,
@@ -113,6 +118,9 @@ export default Vue.extend({
   created(){
     TimeAgo.addLocale(en)
     this.timeAgo = new TimeAgo('en-US')
+  },
+  components:{
+    "vue-markdown":VueMarkdown
   }
 })
 
