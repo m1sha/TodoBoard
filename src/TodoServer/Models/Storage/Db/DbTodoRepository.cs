@@ -17,7 +17,8 @@ namespace TodoServer.Models.Storage.Db
     public async Task<IEnumerable<TodoItem>> GetList(TodoFilter filter)
       => await Task.Run(() =>
       {
-        using var connection = GetConnection();
+        using var connection = CreateConnection();
+        connection.Open();
         using var sp = CreateSpCommand(connection, "gsp_todo_select");
         using var reader = sp.ExecuteReader();
         var result = new List<TodoItem>();
@@ -56,7 +57,8 @@ namespace TodoServer.Models.Storage.Db
     public async Task<string> AddOrUpdate(TodoItem item)
       => await Task.Run(() =>
       {
-        using var connection = GetConnection();
+        using var connection = CreateConnection();
+        connection.Open();
         using var sp = CreateSpCommand(connection, "gsp_todo_insert");
         var uid = item.Uid;
         if (string.IsNullOrEmpty(uid))
@@ -77,7 +79,8 @@ namespace TodoServer.Models.Storage.Db
     public async Task Remove(string[] uids)
        => await Task.Run(() =>
        {
-         using var connection = GetConnection();
+         using var connection = CreateConnection();
+         connection.Open();
          Parallel.ForEach(uids, uid =>
          {
            using var sp = CreateSpCommand(connection, "gsp_todo_delete");

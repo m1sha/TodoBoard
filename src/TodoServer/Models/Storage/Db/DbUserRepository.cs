@@ -14,7 +14,8 @@ namespace TodoServer.Models.Storage.Db
     public async Task<IEnumerable<User>> GetList(UserFilter filter)
     => await Task.Run(() =>
     {
-      using var connection = GetConnection();
+      using var connection = CreateConnection();
+      connection.Open();
       using var sp = CreateSpCommand(connection, "gsp_user_select");
       using var reader = sp.ExecuteReader();
       var result = new List<User>();

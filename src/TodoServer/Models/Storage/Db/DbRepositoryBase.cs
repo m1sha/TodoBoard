@@ -14,11 +14,9 @@ namespace TodoServer.Models.Storage.Db
     protected string ConnectionString { get; }
 
 
-    protected DbConnection GetConnection()
+    protected DbConnection CreateConnection()
     {
-      var result = new SqlConnection(ConnectionString);
-      result.Open();
-      return result;
+      return new SqlConnection(ConnectionString);
     }
 
     protected DbCommand CreateSpCommand(DbConnection connection, string spName)
