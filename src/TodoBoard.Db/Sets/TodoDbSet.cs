@@ -22,7 +22,7 @@ namespace TodoBoard.Db.Sets
       item.AssignToUser = await Context.FindAsync<User>(item.AssignToUser.Id);
       item.CreateByUser = await Context.FindAsync<User>(item.CreateByUser.Id);
       
-      if (DbSet.Any(p => p.Id == item.Id))
+      if (DbSet.AsNoTracking().Any(p => p.Id == item.Id))
       {
         Update(item);
       }
@@ -49,7 +49,11 @@ namespace TodoBoard.Db.Sets
 
     async public Task Remove(string[] uids)
     {
-      RemoveRange(uids.Select(p => new TodoItem() { Id = Guid.Parse(p) }));
+
+      foreach (var item in uids)
+      {
+        Remove(new TodoItem { Id = new Guid(item) });
+      }
       await Context.SaveChangesAsync();
     }
   }

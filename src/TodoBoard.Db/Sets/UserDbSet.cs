@@ -14,6 +14,13 @@ namespace TodoBoard.Db.Sets
     {
     }
 
+    async public Task<string> AddUser(User user)
+    {
+      await AddAsync(user);
+      await Context.SaveChangesAsync();
+      return user.Id.ToString();
+    }
+
     public Task<IEnumerable<User>> GetList(UserFilter filter)
        => Task.Run(() =>
           {
