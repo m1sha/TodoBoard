@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using TodoBoard.Core.Entities;
 
-namespace TodoServer.Models.Services.Intf
+namespace TodoBoard.Core.Storage
 {
-  public interface IUserService
+  public interface IUserRepository
   {
     /// <summary>
     /// Get list of users

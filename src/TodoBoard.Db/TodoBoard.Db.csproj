@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200317144941_NewMigration.cs" />
+    <Compile Remove="Migrations\20200317144941_NewMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200317145200_NewSec.cs" />
+    <Compile Remove="Migrations\20200317145200_NewSec.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
+    <PackageReference Include="PagedList.Core" Version="1.17.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TodoBoard.Core\TodoBoard.Core.csproj" />
+  </ItemGroup>
+
+</Project>

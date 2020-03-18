@@ -1,0 +1,54 @@
+@import "colors";
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  margin: 4px;
+  border-bottom: 1px solid $border-color;
+  background-color: $background-color
+}
+
+.tab-item {
+  cursor: pointer;
+  display: flex;
+  margin: 2px;
+  flex: 1;
+  justify-content: center;
+  padding: 4px;
+  font-size: 12pt;
+  color: $text-color;
+  cursor: pointer;
+  transition: color .5s;
+}
+
+.tab-item:hover {
+  color: $primary-color;
+  text-decoration:none;
+}
+
+.tab-item.selected {
+  border-bottom: 4px solid $primary-color;
+  -webkit-animation: ss .5s cubic-bezier(.1,-0.36,.13,1.43);
+  animation: an-menu-select .5s cubic-bezier(.1,-0.36,.13,1.43);
+}
+
+
+@-webkit-keyframes an-menu-select {
+  from {
+      border-bottom: 4px solid #b9b9b9;
+  }
+
+  to {
+      border-bottom: 4px solid $primary-color;
+  }
+}
+
+@keyframes an-menu-select {
+  from {
+      border-bottom: 4px solid #b9b9b9;
+  }
+
+  to {
+      border-bottom: 4px solid $primary-color;
+  }
+}

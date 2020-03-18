@@ -6,7 +6,7 @@ export class TodoFilter {
   search: string
   
   constructor () {
-    this.page = 0
+    this.page = 1
     this.count = 50
     this.sort = 1
     this.search = ""

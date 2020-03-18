@@ -1,7 +1,6 @@
 <template>
   <div class="todo-card">
     <div class="todo-statuses">
-      <todo-type-view v-model="item.type" />
       <todo-status-view v-model="item.status" />
     </div>
     <div class="todo-column" style="flex:1">
@@ -9,9 +8,9 @@
       
       <div>
         <span class="todo-column-key">by</span>
-        <span class="todo-column-value">{{ item.userCreator.name }}</span>
+        <span class="todo-column-value">{{ item.createByUser.name }}</span>
         <span class="todo-column-key">to</span>
-        <span class="todo-column-value">{{ item.userCreator.uid === item.userAssign.uid ? "self" : item.userAssign.name }}</span>
+        <span class="todo-column-value">{{ item.createByUser.id === item.assignToUser.id ? "self" : item.assignToUser.name }}</span>
       </div>
       <div>
         <span class="todo-column-key">created</span>
@@ -132,7 +131,6 @@ export default Vue.extend({
     this.timeAgo = new TimeAgo('en-US')
   },
   components:{
-    "todo-type-view": TodoTypeView,
     "todo-status-view": TodoStatusView
   }
 })

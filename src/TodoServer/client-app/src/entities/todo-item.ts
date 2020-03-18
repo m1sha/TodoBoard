@@ -1,21 +1,21 @@
 import { User } from './user'
 
 export class TodoItem {
-  uid: string
+  id: string
   title: string
   message: string
   status: number
   type: number
-  userCreator: User
-  userAssign: User
+  createByUser: User
+  assignToUser: User
 
   constructor(){
-    this.uid = ""
+    this.id = ""
     this.title = ""
     this.message = ""
     this.status = 0
     this.type = 0
-    this.userCreator = new User()
-    this.userAssign =  new User()
+    this.createByUser = new User()
+    this.assignToUser =  new User()
   }
 }

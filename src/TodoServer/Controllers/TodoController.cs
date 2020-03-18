@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using TodoBoard.Core.Entities;
 using TodoServer.Models.Entities;
 using TodoServer.Models.Services.Intf;
 
@@ -53,9 +54,9 @@ namespace TodoServer.Controllers
     /// <returns></returns>
     [Route("Todo/Remove")]
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] string[] uids)
+    public async Task<IActionResult> Remove([FromBody] string[] ids)
     {
-      await service.Remove(uids);
+      await service.Remove(ids);
       return Ok();
     }
   }

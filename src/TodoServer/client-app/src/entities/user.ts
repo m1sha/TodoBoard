@@ -1,9 +1,9 @@
 export class User {
-  uid: string
+  id: string
   name: string
   
   constructor(){
-    this.uid = ""
+    this.id = ""
     this.name = ""
   }
 }

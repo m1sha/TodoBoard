@@ -1,7 +1,7 @@
 <template>
 
 <select ref="select" v-model="selected">
-  <option v-for="(item, index) in items" :value="item.uid" :key="index" >
+  <option v-for="(item, index) in items" :value="item.id" :key="index" >
      {{item.name}}
   </option>
 </select>
@@ -29,10 +29,10 @@ export default Vue.extend({
      event: "change-selected"
   },
   methods:{
-    onSelect(uid: string | number){
-      let res = uid
+    onSelect(id: string | number){
+      let res = id
       if (this.type === "number")
-        res = parseInt(uid as string)
+        res = parseInt(id as string)
       this.$emit("change-selected", res)
     }
 
@@ -43,10 +43,10 @@ export default Vue.extend({
     var j = {} as any
     var ctx = this
     eval(` 
-    $(select).select2()
+    $(select).select2({ containerCssClass: "select" })
     $(select).on('select2:select', function (e) {
-      var uid = e.params.data.id;
-      ctx.onSelect(uid)
+      var id = e.params.data.id;
+      ctx.onSelect(id)
     });
     `)
     

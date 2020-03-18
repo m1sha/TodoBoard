@@ -13,10 +13,14 @@
 
 .form .input-control,
 .form .textarea-control,
-.form select {
+.form .select {
   width: 100%;
   padding: 6px 4px;
   border: 1px solid $border-color;
   border-radius: 4px;
   background-color: $background-color;
+}
+
+.form .select{
+  padding: 18px 4px;
 }

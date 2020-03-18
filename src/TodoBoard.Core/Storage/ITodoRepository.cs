@@ -2,12 +2,9 @@
 using System.Threading.Tasks;
 using TodoBoard.Core.Entities;
 
-namespace TodoServer.Models.Services.Intf
+namespace TodoBoard.Core.Storage
 {
-  /// <summary>
-  /// Interface of Todo Service
-  /// </summary>
-  public interface ITodoService
+  public interface ITodoRepository
   {
     /// <summary>
     /// Get list of ToDo items
@@ -15,13 +12,6 @@ namespace TodoServer.Models.Services.Intf
     /// <param name="filter">Search filter</param>
     /// <returns></returns>
     public Task<IEnumerable<TodoItem>> GetList(TodoFilter filter);
-
-    /// <summary>
-    /// Get ToDo item by UID
-    /// </summary>
-    /// <param name="uid">Uniq identifier</param>
-    /// <returns></returns>
-    public Task<TodoItem> GetOne(string uid);
 
     /// <summary>
     /// Add new or update exists ToDo item in the ToDo items list

@@ -55,7 +55,7 @@ const TodoModule = {
    async [Action.TodoRemove]({commit, state}, item: TodoItem){
     commit(Mutations.setDataSending, true)
     try{
-      const r = await client.todo.removeTodo([item.uid]);
+      const r = await client.todo.removeTodo([item.id]);
       commit(Mutations.setDataSending, false)
     }
     catch(e){

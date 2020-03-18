@@ -6,9 +6,22 @@
 
   <ItemGroup>
     <Compile Remove="client-app\**" />
+    <Compile Remove="Models\Storage\**" />
     <Content Remove="client-app\**" />
+    <Content Remove="Models\Storage\**" />
     <EmbeddedResource Remove="client-app\**" />
+    <EmbeddedResource Remove="Models\Storage\**" />
     <None Remove="client-app\**" />
+    <None Remove="Models\Storage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\Entities\TodoFilter.cs" />
+    <Compile Remove="Models\Entities\TodoItem.cs" />
+    <Compile Remove="Models\Entities\TodoStatus.cs" />
+    <Compile Remove="Models\Entities\TodoType.cs" />
+    <Compile Remove="Models\Entities\User.cs" />
+    <Compile Remove="Models\Entities\UserFilter.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +32,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\sql\install\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TodoBoard.Core\TodoBoard.Core.csproj" />
+    <ProjectReference Include="..\TodoBoard.Db\TodoBoard.Db.csproj" />
   </ItemGroup>
 
 

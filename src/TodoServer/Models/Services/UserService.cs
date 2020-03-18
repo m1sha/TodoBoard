@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TodoServer.Models.Entities;
+using TodoBoard.Core.Entities;
+using TodoBoard.Core.Storage;
 using TodoServer.Models.Services.Intf;
-using TodoServer.Models.Storage.Intf;
+
 
 namespace TodoServer.Models.Services
 {
   public class UserService: IUserService
   {
-    private readonly IStorage storage;
+    private readonly ITodoBoardStorage storage;
 
-    public UserService(IStorage storage)
+    public UserService(ITodoBoardStorage storage)
     {
       this.storage = storage;
     }
 
     public Task<IEnumerable<User>> GetList(UserFilter filter)
-      => storage.User.GetList(filter);
+      => storage.Users.GetList(filter);
   }
 }

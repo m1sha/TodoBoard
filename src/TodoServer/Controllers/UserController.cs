@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using TodoBoard.Core.Entities;
 using TodoServer.Models.Entities;
 using TodoServer.Models.Services.Intf;
 

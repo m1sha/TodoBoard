@@ -37,16 +37,20 @@
     "install": "^0.12.2",
     "javascript-time-ago": "^2.0.7",
     "jquery": "^3.4.1",
+    "luxon": "^1.22.0",
     "node-sass": "^4.13.0",
     "select2": "~4.0",
     "tslib": "^1.10.0",
     "url-loader": "^1.1.2",
+    "v-calendar": "^1.0.0-beta.23",
     "vue": "^2.6.10",
+    "vue-datetime": "^1.0.0-beta.11",
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.0.6",
     "vue-upload-component": "^2.8.20",
     "vue2-touch-events": "^2.0.0",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "weekstart": "^1.0.1"
   },
   "browserslist": [
     "> 1%",

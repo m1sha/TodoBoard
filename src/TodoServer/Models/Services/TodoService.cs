@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TodoServer.Models.Entities;
+using TodoBoard.Core.Entities;
+using TodoBoard.Core.Storage;
 using TodoServer.Models.Entities.Validation;
 using TodoServer.Models.Services.Intf;
-using TodoServer.Models.Storage.Intf;
+
 
 namespace TodoServer.Models.Services
 {
   public class TodoService : ITodoService
   {
-    private readonly IStorage storage;
+    private readonly ITodoBoardStorage storage;
 
-    public TodoService(IStorage storage)
+    public TodoService(ITodoBoardStorage storage)
     {
       this.storage = storage;
     }
 
     public Task<IEnumerable<TodoItem>> GetList(TodoFilter filter)
-      => storage.Todo.GetList(filter);
+      => storage.Todos.GetList(filter);
 
     public Task<TodoItem> GetOne(string uid)
     {
@@ -28,11 +29,11 @@ namespace TodoServer.Models.Services
     public async Task<string> AddOrUpdate(TodoItem item)
     {
       item.Validate();
-      return await storage.Todo.AddOrUpdate(item);
+      return await storage.Todos.AddOrUpdate(item);
     }
        
 
     public Task Remove(string[] uids)
-      => storage.Todo.Remove(uids);
+      => storage.Todos.Remove(uids);
   }
 }

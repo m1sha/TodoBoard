@@ -1,15 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.IO;
+using TodoBoard.Core.Storage;
+using TodoBoard.Db;
 using TodoServer.Hubs;
 using TodoServer.Middleware;
 using TodoServer.Models.Services;
 using TodoServer.Models.Services.Intf;
-using TodoServer.Models.Storage;
-using TodoServer.Models.Storage.Db;
+
 
 namespace TodoServer
 {
@@ -29,17 +30,16 @@ namespace TodoServer
     {
       services.AddControllersWithViews();
       services.AddSignalR();
-      
-      var settings = Configuration.GetSection("TodoStorageSettings").Get<TodoStorageSettings>();
-      string rootPath = Environment.WebRootPath;
-      settings.SqlInstallFileName = Path.Combine(rootPath, settings.SqlInstallFileName);
 
-      var storage = DbStorageFactory.Create(settings);
-      storage.CheckConnection();
-      storage.CreateIfNotExists();
+      var options = new DbContextOptionsBuilder<TodoBoardDbContext>()
+                   .UseSqlServer(Configuration.GetConnectionString("TodoBoard"))
+                   .Options;
 
-      services.AddSingleton<ITodoService, TodoService>(_ => new TodoService(storage));
-      services.AddSingleton<IUserService, UserService>(_ => new UserService(storage));
+      var db = new TodoBoardDbContext(options);
+      ((ITodoBoardStorage)db).CreateIfNotExists();
+
+      services.AddSingleton<ITodoService, TodoService>(_ => new TodoService(db));
+      services.AddSingleton<IUserService, UserService>(_ => new UserService(db));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
