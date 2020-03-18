@@ -10,7 +10,7 @@ export class TodoItem {
   assignToUser: User
 
   constructor(){
-    this.id = ""
+    this.id = "00000000-0000-0000-0000-000000000000"
     this.title = ""
     this.message = ""
     this.status = 0

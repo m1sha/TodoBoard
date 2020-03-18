@@ -21,7 +21,16 @@ namespace TodoBoard.Db.Sets
     {
       item.AssignToUser = await Context.FindAsync<User>(item.AssignToUser.Id);
       item.CreateByUser = await Context.FindAsync<User>(item.CreateByUser.Id);
-      await AddAsync(item);
+      
+      if (DbSet.Any(p => p.Id == item.Id))
+      {
+        Update(item);
+      }
+      else
+      {
+        await AddAsync(item);
+      }
+      
       await Context.SaveChangesAsync();
       return item.Id.ToString();
     }
