@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["appf"],{7734:function(e,t,n){"use strict";n.r(t);var o=function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)},r=[function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("footer",{staticClass:"border-top footer text-muted"},[n("div",{staticClass:"container"},[e._v(" © 2020 - The To Do Board ")])])}],a=n("2b0e"),s=a["a"].extend({}),c=s,l=n("2877"),i=Object(l["a"])(c,o,r,!1,null,null,null);t["default"]=i.exports}}]);
+//# sourceMappingURL=appf.31c4269b.js.map
