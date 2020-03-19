@@ -10,8 +10,8 @@ connection.start().catch(err => console.log(err));
 export default class TodoListBroadcast{
 
   constructor(storage: any){
-    connection.on("TodoListReceived", data => {
-      storage.dispatch("TodoList");
+    connection.on("TodoListReceived", result => {
+      storage.dispatch("TodoListAttach", result);
     });
   }
 
