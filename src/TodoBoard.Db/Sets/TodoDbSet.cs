@@ -15,6 +15,7 @@ namespace TodoBoard.Db.Sets
   {
     public TodoDbSet(DbContext context, DbSet<TodoItem> dbSet) : base(context, dbSet)
     {
+     
     }
 
     async public Task<string> AddOrUpdate(TodoItem item)
@@ -32,6 +33,7 @@ namespace TodoBoard.Db.Sets
       }
       
       await Context.SaveChangesAsync();
+      
       return item.Id.ToString();
     }
 
@@ -49,10 +51,10 @@ namespace TodoBoard.Db.Sets
 
     async public Task Remove(string[] uids)
     {
-
-      foreach (var item in uids)
+      foreach (var uid in uids)
       {
-        Remove(new TodoItem { Id = new Guid(item) });
+        var item = DbSet.Find(new Guid(uid));
+        Remove(item);
       }
       await Context.SaveChangesAsync();
     }

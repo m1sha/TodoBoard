@@ -55,7 +55,7 @@ namespace TodoBoard.Tests
       Assert.IsNotNull(user2, "Result is null");
     }
 
- //   [TestMethod]
+    [TestMethod]
     public void Add_Todo_Success()
     {
       var userA = new User() { Name = "User A" };
@@ -94,7 +94,7 @@ namespace TodoBoard.Tests
       Assert.IsTrue(savedTodoItem.Title == todoItem.Title, "savedTodoItem.Title != todoItem.Title");
     }
 
-    //[TestMethod]
+    [TestMethod]
     public void Remove_Todo_Success()
     {
       var userA = new User() { Name = "User A" };
@@ -107,12 +107,12 @@ namespace TodoBoard.Tests
       Assert.IsNotNull(result, "Didn't added");
 
       
-      //var count = storage.Todos.GetList(new TodoFilter()).Result.Count();
-      //Assert.IsTrue(count == 1, "Not equals an one");
+      var count = storage.Todos.GetList(new TodoFilter()).Result.Count();
+      Assert.IsTrue(count == 1, "Not equals an one");
 
       storage.Todos.Remove(new[] { result }).Wait();
 
-      var count = storage.Todos.GetList(new TodoFilter()).Result.Count();
+      count = storage.Todos.GetList(new TodoFilter()).Result.Count();
       Assert.IsTrue(count == 0, "Not equals a zero");
     }
 
