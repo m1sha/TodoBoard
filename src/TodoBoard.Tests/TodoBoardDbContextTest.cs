@@ -33,7 +33,7 @@ namespace TodoBoard.Tests
 
 
     [TestMethod]
-    public void Users_IS_TEN()
+    public void Users_Are_Ten()
     {
       for (var i = 0; i < 10; i++)
       {
@@ -117,7 +117,7 @@ namespace TodoBoard.Tests
     }
 
     [TestMethod]
-    public void Todos_IS_TEN()
+    public void Todos_Are_Ten()
     {
       var userA = new User() { Name = "User A" };
       var userB = new User() { Name = "User B" };
