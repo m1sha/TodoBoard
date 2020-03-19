@@ -46,6 +46,7 @@ const TodoModule = {
     try{
       const r = await client.todo.addTodo(item);
       commit(Mutations.setDataSending, false)
+      this["todoListBroadcast"].send(1)
     }
     catch(e){
       commit(Mutations.setDataSending, false)
@@ -57,6 +58,7 @@ const TodoModule = {
     try{
       const r = await client.todo.removeTodo([item.id]);
       commit(Mutations.setDataSending, false)
+      this["todoListBroadcast"].send(1)
     }
     catch(e){
       commit(Mutations.setDataSending, false)

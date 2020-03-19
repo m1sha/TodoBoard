@@ -8,5 +8,9 @@ namespace TodoServer.Hubs
 {
   public class TodoCrudSyncHub: Hub
   {
+    public async Task TodoListSending(int num)
+    {
+      await Clients.Others.SendAsync("TodoListReceived", num);
+    }
   }
 }
