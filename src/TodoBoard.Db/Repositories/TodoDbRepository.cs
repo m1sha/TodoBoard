@@ -7,58 +7,65 @@ using TodoBoard.Core.Entities;
 using TodoBoard.Core.Storage;
 using PagedList.Core;
 
-namespace TodoBoard.Db.Sets
+namespace TodoBoard.Db.Repositories
 {
-  public class TodoDbSet : DbSetWrapper<TodoItem>, ITodoRepository
+  public class TodoDbRepository :  ITodoRepository
   {
-    public TodoDbSet(DbContext context, DbSet<TodoItem> dbSet) : base(context, dbSet)
+    private readonly Func<TodoBoardDbContext> dbContextFactory;
+
+    public TodoDbRepository(Func<TodoBoardDbContext> dbContextFactory) 
     {
+      this.dbContextFactory = dbContextFactory;
     }
 
     async public Task<string> AddOrUpdate(TodoItem item)
     {
-      item.AssignToUser = await Context.FindAsync<User>(item.AssignToUser.Id);
-      item.CreateByUser = await Context.FindAsync<User>(item.CreateByUser.Id);
+      using var context = dbContextFactory.Invoke();
+
+      item.AssignToUser = await context.FindAsync<User>(item.AssignToUser.Id);
+      item.CreateByUser = await context.FindAsync<User>(item.CreateByUser.Id);
       
-      if (DbSet.AsNoTracking().Any(p => p.Id == item.Id))
+      if (context.Todos.AsNoTracking().Any(p => p.Id == item.Id))
       {
-        Update(item);
+        context.Todos.Update(item);
       }
       else
       {
-        await AddAsync(item);
+        await context.Todos.AddAsync(item);
       }
       
-      await Context.SaveChangesAsync();
-      
+      await context.SaveChangesAsync();
       return item.Id.ToString();
     }
 
     public Task<IEnumerable<TodoItem>> GetList(TodoFilter filter)
        => Task.Run(() =>
        {
-         return DbSet
-           .AsNoTracking()
+         using var context = dbContextFactory.Invoke();
+         return context.Todos
+
            .OrderByDescending(p=>p.ChangeDate)
            .Include(p => p.AssignToUser)
            .Include(p => p.CreateByUser)
+           .AsNoTracking()
            .ToPagedList(filter.Page, filter.PageCount)
            .AsEnumerable();
        });
 
     async public Task Remove(string[] uids)
     {
+      using var context = dbContextFactory.Invoke();
       foreach (var uid in uids)
       {
         var id = new Guid(uid);
-        var item =  Context.ChangeTracker
+        var item = context.ChangeTracker
           .Entries<TodoItem>()
           .FirstOrDefault(p=>p.Entity.Id == id)?.Entity 
           ?? new TodoItem { Id = id };
-        
-        Remove(item);
+
+        context.Todos.Remove(item);
       }
-      await Context.SaveChangesAsync();
+      await context.SaveChangesAsync();
     }
   }
 }

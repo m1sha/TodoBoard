@@ -12,23 +12,26 @@ namespace TodoBoard.Tests
   public class TodoBoardDbContextTest
   {
     private ITodoBoardStorage storage;
+    private DbContextOptions<TodoBoardDbContext> options;
 
     [TestInitialize]
     public void Init()
     {
-      var options = new DbContextOptionsBuilder<TodoBoardDbContext>()
+      options = new DbContextOptionsBuilder<TodoBoardDbContext>()
                    .UseInMemoryDatabase("TodoBoardDb")
+                   .EnableSensitiveDataLogging(true)
                    .Options;
-
-      storage = new TodoBoardDbContext(options);
       
+
+      storage = new DbTodoBoardStorage(() => new TodoBoardDbContext(options));
+
     }
 
     [TestCleanup]
     public void Clear()
     {
-      (storage as TodoBoardDbContext).Database.EnsureDeleted();
-      (storage as IDisposable).Dispose();
+      using var context = new TodoBoardDbContext(options);
+      context.Database.EnsureDeleted();
     }
 
 

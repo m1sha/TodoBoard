@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TodoBoard.Core.Storage;
 using TodoBoard.Db;
 using TodoServer.Hubs;
 using TodoServer.Middleware;
@@ -35,11 +34,11 @@ namespace TodoServer
                    .UseSqlServer(Configuration.GetConnectionString("TodoBoard"))
                    .Options;
 
-      var db = new TodoBoardDbContext(options);
-      ((ITodoBoardStorage)db).CreateIfNotExists();
+      var storage = new DbTodoBoardStorage(() => new TodoBoardDbContext(options));
+      storage.CreateIfNotExists();
 
-      services.AddSingleton<ITodoService, TodoService>(_ => new TodoService(db));
-      services.AddSingleton<IUserService, UserService>(_ => new UserService(db));
+      services.AddSingleton<ITodoService, TodoService>(_ => new TodoService(storage));
+      services.AddSingleton<IUserService, UserService>(_ => new UserService(storage));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
