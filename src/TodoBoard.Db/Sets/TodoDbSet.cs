@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TodoBoard.Core.Entities;
 using TodoBoard.Core.Storage;
-using PagedList;
 using PagedList.Core;
 
 namespace TodoBoard.Db.Sets
@@ -15,7 +13,6 @@ namespace TodoBoard.Db.Sets
   {
     public TodoDbSet(DbContext context, DbSet<TodoItem> dbSet) : base(context, dbSet)
     {
-     
     }
 
     async public Task<string> AddOrUpdate(TodoItem item)
@@ -53,7 +50,12 @@ namespace TodoBoard.Db.Sets
     {
       foreach (var uid in uids)
       {
-        var item = DbSet.Find(new Guid(uid));
+        var id = new Guid(uid);
+        var item =  Context.ChangeTracker
+          .Entries<TodoItem>()
+          .FirstOrDefault(p=>p.Entity.Id == id)?.Entity 
+          ?? new TodoItem { Id = id };
+        
         Remove(item);
       }
       await Context.SaveChangesAsync();
