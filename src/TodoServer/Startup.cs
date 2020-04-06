@@ -1,10 +1,15 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TodoBoard.Core.Entities;
+using TodoBoard.Core.Entities.Validators;
 using TodoBoard.Db;
+using TodoServer.Filters;
 using TodoServer.Hubs;
 using TodoServer.Middleware;
 using TodoServer.Models.Services;
@@ -27,6 +32,7 @@ namespace TodoServer
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddMvc().AddFluentValidation();
       services.AddControllersWithViews();
       services.AddSignalR();
 
@@ -39,6 +45,9 @@ namespace TodoServer
 
       services.AddSingleton<ITodoService, TodoService>(_ => new TodoService(storage));
       services.AddSingleton<IUserService, UserService>(_ => new UserService(storage));
+
+      services.AddTransient<IValidator<TodoItem>, TodoItemValidator>();
+      services.AddScoped<ValidationAttribute>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

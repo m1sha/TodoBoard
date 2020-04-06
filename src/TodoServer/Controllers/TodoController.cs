@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Threading.Tasks;
 using TodoBoard.Core.Entities;
+using TodoServer.Filters;
 using TodoServer.Models.Entities;
 using TodoServer.Models.Services.Intf;
 
@@ -41,6 +43,7 @@ namespace TodoServer.Controllers
     /// <returns></returns>
     [Route("Todo/Add")]
     [HttpPost]
+    [Validation]
     public async Task<IActionResult> Add([FromBody] TodoItem item)
     {
       var result = await service.AddOrUpdate(item);
